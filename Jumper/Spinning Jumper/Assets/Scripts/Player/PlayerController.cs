@@ -35,6 +35,11 @@ namespace com.flyingcrow.jumper.controller
                 player.Jump();
             }
 
+            if (player.PlayerIsDying())
+            {
+                eventManager.InvokePlayerDying();
+            }
+
             if (player.IsPlayerDead())
             {
                 eventManager.InvokePlayerDied();

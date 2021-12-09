@@ -14,7 +14,7 @@ namespace com.flyingcrow.jumper.player
         private bool isDead = false;
         private Rigidbody2D rigidBody;
         [SerializeField]
-        private PlayerSpriteHandler childBody;
+        private PlayerSpriteHandler spriteHandler;
 
         private void Start()
         {
@@ -25,11 +25,11 @@ namespace com.flyingcrow.jumper.player
         {
             if (!jumping)
             {
-                childBody.RotateTowardsTarget(jumpForce);
+                spriteHandler.RotateTowardsTarget(jumpForce);
             } 
             else
             {
-                childBody.RotateTowardsTarget(childBody.transform.eulerAngles + Vector3.back * 100 * (rigidBody.gravityScale > 0 ? 1 : -1), jumpForce * 2);
+                spriteHandler.RotateTowardsTarget(spriteHandler.transform.eulerAngles + Vector3.back * 100 * (rigidBody.gravityScale > 0 ? 1 : -1), jumpForce * 2);
             }
         }
 
@@ -40,15 +40,21 @@ namespace com.flyingcrow.jumper.player
 
         public bool IsPlayerDead()
         {
+            return isDead && spriteHandler.NoDeadAnimation();
+        }
+
+        public bool PlayerIsDying()
+        {
             return isDead;
         }
+
         public void Revive()
         {
             rigidBody.velocity = Vector2.zero;
             isDead = false; 
             jumping = true;
             setParticleSystem();
-            childBody.SnapPosition();
+            spriteHandler.Revive();
         }
 
         public void Jump()
@@ -68,6 +74,7 @@ namespace com.flyingcrow.jumper.player
         public void KillPlayer()
         {
             isDead = true;
+            spriteHandler.PlayDead();
         }
 
         public void Falling()
@@ -83,12 +90,12 @@ namespace com.flyingcrow.jumper.player
         public void ChangeGravity()
         {
             rigidBody.gravityScale *= -1;
-            childBody.changeGravity(rigidBody.gravityScale > 0);
+            spriteHandler.changeGravity(rigidBody.gravityScale > 0);
         }
 
         public void setParticleSystem()
         {
-            childBody.enableDisableParticleSystem(!jumping);
+            spriteHandler.EnableDisableParticleSystem(!jumping);
         }
 
     }

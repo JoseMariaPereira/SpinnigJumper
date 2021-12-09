@@ -15,19 +15,25 @@ namespace com.flyingcrow.jumper.player
         [SerializeField]
         private ParticleSystem deadParticleSystem;
         [SerializeField]
+        private ParticleSystem deadParticleSystem2;
+        [SerializeField]
         private Sprite completedSprite;
         [SerializeField]
         private List<SpritesContainer> playerSprites;
+        private SpriteRenderer spriteRenderer;
 
         private void Start()
         {
             completedSprite = CombineSprite();
-            SpriteRenderer spriteRenderer = this.GetComponent<SpriteRenderer>();
+            spriteRenderer = this.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = completedSprite;
             spriteRenderer.color = Color.white;
             bottomParticleSystem.textureSheetAnimation.SetSprite(0, completedSprite);
             topParticleSystem.textureSheetAnimation.SetSprite(0, completedSprite);
             deadParticleSystem.textureSheetAnimation.SetSprite(0, completedSprite);
+            deadParticleSystem2.textureSheetAnimation.SetSprite(0, completedSprite);
+            deadParticleSystem.Stop();
+            deadParticleSystem2.Stop();
             groundParticleSystem = bottomParticleSystem;
         }
 
@@ -124,12 +130,12 @@ namespace com.flyingcrow.jumper.player
         }
 
 
-        public void enableDisableParticleSystem(bool enable)
+        public void EnableDisableParticleSystem(bool enable)
         {
-            if (enable)
+            if (enable && spriteRenderer.enabled)
             {
                 groundParticleSystem.Play();
-            } 
+            }
             else
             {
                 groundParticleSystem.Stop();
@@ -150,6 +156,26 @@ namespace com.flyingcrow.jumper.player
             }
         }
 
+        public void PlayDead()
+        {
+            if (spriteRenderer.enabled)
+            {
+                deadParticleSystem.Play();
+                deadParticleSystem2.Play();
+                groundParticleSystem.Stop();
+            }
+            spriteRenderer.enabled = false;
+        }
+
+        public void Revive()
+        {
+            spriteRenderer.enabled = true;
+            SnapPosition();
+        }
+
+        public bool NoDeadAnimation() {
+            return deadParticleSystem.isStopped && deadParticleSystem2.isStopped;
+        }
     }
 
     [System.Serializable]
