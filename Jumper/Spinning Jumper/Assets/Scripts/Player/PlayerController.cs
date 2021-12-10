@@ -15,6 +15,8 @@ namespace com.flyingcrow.jumper.controller
         [SerializeField]
         private EventManager eventManager;
         private bool isGravityDown = true;
+        private bool dead = false;
+        private bool dying = false;
 
         private void Start()
         {
@@ -36,14 +38,16 @@ namespace com.flyingcrow.jumper.controller
                 player.Jump();
             }
 
-            if (player.PlayerIsDying())
+            if (player.PlayerIsDying() && !dying)
             {
                 eventManager.InvokePlayerDying();
+                dying = true;
             }
 
-            if (player.IsPlayerDead())
+            if (player.IsPlayerDead() && !dead)
             {
-                eventManager.InvokeRestartingLevel();
+                eventManager.InvokePlayerDead();
+                dead = true;
             }
         }
 
@@ -51,6 +55,8 @@ namespace com.flyingcrow.jumper.controller
         {
             player.transform.position = new Vector3(startPosition.x, startPosition.y);
             player.Revive();
+            dead = false;
+            dying = false;
             if (!isGravityDown)
             {
                 eventManager.InvokeGravity();
@@ -61,6 +67,11 @@ namespace com.flyingcrow.jumper.controller
         {
             player.ChangeGravity();
             isGravityDown = !isGravityDown;
+        }
+
+        public Sprite GetPlayerSprite()
+        {
+            return player.GetSprite();
         }
     }
 }

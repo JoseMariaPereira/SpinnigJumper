@@ -8,7 +8,9 @@ namespace com.flyingcrow.jumper.controller
         [SerializeField]
         private EventManager eventManager;
         [SerializeField]
-        private int percentage;
+        private string levelName;
+        [SerializeField]
+        private float percentage;
         [SerializeField]
         private int deathCounter;
         [SerializeField]
@@ -26,19 +28,27 @@ namespace com.flyingcrow.jumper.controller
                 Debug.LogWarning("No eventManager found!");
             }
 
-            eventManager.SubscribeRestartingLevel(PlayerDiedWindow);
+            eventManager.SubscribePlayerDying(PlayerDying);
             eventManager.SubscribeRestarting(RestartLevel);
         }
 
-        public void PlayerDiedWindow()
+        public float GetProgress()
+        {
+            return percentage;
+        }
+        public string GetLevelName()
+        {
+            return levelName;
+        }
+
+        public void PlayerDying()
         {
             deathCounter++;
-            eventManager.InvokeRestarting();
         }
 
         public void RestartLevel()
         {
-            Debug.Log(deathCounter);
+            
         }
         
     }

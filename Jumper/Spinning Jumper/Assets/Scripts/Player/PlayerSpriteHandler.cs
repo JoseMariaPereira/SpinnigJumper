@@ -180,6 +180,11 @@ namespace com.flyingcrow.jumper.player
         public bool NoDeadAnimation() {
             return deadParticleSystem.isStopped && deadParticleSystem2.isStopped;
         }
+
+        public Sprite GetCompletedSprite()
+        {
+            return completedSprite;
+        }
     }
 
     [System.Serializable]

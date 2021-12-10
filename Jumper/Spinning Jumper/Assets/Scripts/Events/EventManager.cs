@@ -10,6 +10,8 @@ namespace com.flyingcrow.jumper.events
         [SerializeField]
         private UnityEvent playerDying;
         [SerializeField]
+        private UnityEvent playerDead;
+        [SerializeField]
         private UnityEvent restartLevel;
         [SerializeField]
         private UnityEvent gravitySwitch;
@@ -41,6 +43,21 @@ namespace com.flyingcrow.jumper.events
         public void InvokePlayerDying()
         {
             playerDying.Invoke();
+        }
+
+        public void SubscribePlayerDead(UnityAction action)
+        {
+            playerDead.AddListener(action);
+        }
+
+        public void UnsubscribePlayerDead(UnityAction action)
+        {
+            playerDead.RemoveListener(action);
+        }
+
+        public void InvokePlayerDead()
+        {
+            playerDead.Invoke();
         }
 
         public void SubscribeRestarting(UnityAction action)

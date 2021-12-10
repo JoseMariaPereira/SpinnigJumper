@@ -99,6 +99,10 @@ namespace com.flyingcrow.jumper.player
             spriteHandler.EnableDisableParticleSystem(!jumping);
         }
 
+        public Sprite GetSprite()
+        {
+            return spriteHandler.GetCompletedSprite();
+        }
     }
 }
 
