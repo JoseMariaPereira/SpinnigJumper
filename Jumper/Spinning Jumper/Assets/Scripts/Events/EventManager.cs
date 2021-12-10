@@ -6,7 +6,7 @@ namespace com.flyingcrow.jumper.events
     public class EventManager : MonoBehaviour
     {
         [SerializeField]
-        private UnityEvent playerDied;
+        private UnityEvent restartingLevel;
         [SerializeField]
         private UnityEvent playerDying;
         [SerializeField]
@@ -14,19 +14,19 @@ namespace com.flyingcrow.jumper.events
         [SerializeField]
         private UnityEvent gravitySwitch;
 
-        public void SubscribePlayerDied(UnityAction action)
+        public void SubscribeRestartingLevel(UnityAction action)
         {
-            playerDied.AddListener(action);
+            restartingLevel.AddListener(action);
         }
 
-        public void UnsubscribePlayerDied(UnityAction action)
+        public void UnsubscribeRestartingLevel(UnityAction action)
         {
-            playerDied.RemoveListener(action);
+            restartingLevel.RemoveListener(action);
         }
 
-        public void InvokePlayerDied()
+        public void InvokeRestartingLevel()
         {
-            playerDied.Invoke();
+            restartingLevel.Invoke();
         }
         public void SubscribePlayerDying(UnityAction action)
         {

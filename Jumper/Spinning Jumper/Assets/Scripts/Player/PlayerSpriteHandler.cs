@@ -42,17 +42,21 @@ namespace com.flyingcrow.jumper.player
             Texture2D newSprite = new Texture2D(100, 100);
             foreach (SpritesContainer container in playerSprites)
             {
-                Sprite s = container.sprite;
+                Sprite sprite = container.sprite;
                 for (int i = 0; i < 100; i++)
                 {
                     for (int j = 0; j < 100; j++)
                     {
-                        Color c = s.texture.GetPixel(i, j).a == 0 ? newSprite.GetPixel(i, j) : s.texture.GetPixel(i, j);
-                        if (c == Color.white)
+                        Color spriteColor = sprite.texture.GetPixel(i, j);
+                        if (spriteColor == Color.white)
                         {
-                            c = container.color;
+                            spriteColor = container.color;
                         }
-                        newSprite.SetPixel(i, j, c);
+                        if (spriteColor.a != 1)
+                        {
+                            spriteColor = newSprite.GetPixel(i, j);
+                        }
+                        newSprite.SetPixel(i, j, spriteColor);
                     }
                 }
             }

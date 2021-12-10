@@ -19,6 +19,7 @@ namespace com.flyingcrow.jumper.player
         private void Start()
         {
             rigidBody = this.GetComponent<Rigidbody2D>();
+            spriteHandler.changeGravity(rigidBody.gravityScale > 0);
         }
 
         private void Update()

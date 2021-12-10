@@ -26,7 +26,7 @@ namespace com.flyingcrow.jumper.controller
                 Debug.LogWarning("No eventManager found!");
             }
 
-            eventManager.SubscribePlayerDied(PlayerDiedWindow);
+            eventManager.SubscribeRestartingLevel(PlayerDiedWindow);
             eventManager.SubscribeRestarting(RestartLevel);
         }
 

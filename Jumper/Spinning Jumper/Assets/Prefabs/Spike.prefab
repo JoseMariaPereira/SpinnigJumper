@@ -118,7 +118,7 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,12 +131,9 @@ PolygonCollider2D:
   m_AutoTiling: 1
   m_Points:
     m_Paths:
-    - - {x: -0.03, y: 0.5}
-      - {x: -0.5, y: -0.42999998}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: -0.45}
-      - {x: 0.02, y: 0.5}
+    - - {x: 0, y: 0.4}
+      - {x: -0.45, y: -0.5}
+      - {x: 0.45, y: -0.5}
 --- !u!114 &7594243980189295543
 MonoBehaviour:
   m_ObjectHideFlags: 0
