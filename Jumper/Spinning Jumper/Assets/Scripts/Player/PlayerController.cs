@@ -42,6 +42,7 @@ namespace com.flyingcrow.jumper.controller
             {
                 eventManager.InvokePlayerDying();
                 dying = true;
+                dead = false;
             }
 
             if (player.IsPlayerDead() && !dead)
@@ -54,9 +55,9 @@ namespace com.flyingcrow.jumper.controller
         public void RestartPlayer()
         {
             player.transform.position = new Vector3(startPosition.x, startPosition.y);
-            player.Revive();
             dead = false;
             dying = false;
+            player.Revive();
             if (!isGravityDown)
             {
                 eventManager.InvokeGravity();
@@ -72,6 +73,11 @@ namespace com.flyingcrow.jumper.controller
         public Sprite GetPlayerSprite()
         {
             return player.GetSprite();
+        }
+
+        public float GetStartPosition()
+        {
+            return startPosition.x;
         }
     }
 }

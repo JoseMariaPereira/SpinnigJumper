@@ -8,15 +8,17 @@ namespace com.flyingcrow.jumper.controller
         [SerializeField]
         private EventManager eventManager;
         [SerializeField]
+        private GroundMoover groundController;
+        [SerializeField]
+        private PlayerController playerController;
+        [SerializeField]
         private string levelName;
         [SerializeField]
-        private float percentage;
-        [SerializeField]
         private int deathCounter;
-        [SerializeField]
-        private float startPos;
-        [SerializeField]
-        private float endPos;
+
+        private float startDistance;
+
+        private float highScore;
 
 
 
@@ -27,15 +29,15 @@ namespace com.flyingcrow.jumper.controller
             {
                 Debug.LogWarning("No eventManager found!");
             }
-
+            startDistance = groundController.GetGoalPosition().x - playerController.GetStartPosition();
             eventManager.SubscribePlayerDying(PlayerDying);
-            eventManager.SubscribeRestarting(RestartLevel);
         }
 
-        public float GetProgress()
+        public int GetDeaths()
         {
-            return percentage;
+            return deathCounter;
         }
+
         public string GetLevelName()
         {
             return levelName;
@@ -46,10 +48,25 @@ namespace com.flyingcrow.jumper.controller
             deathCounter++;
         }
 
-        public void RestartLevel()
+        public ScoreAndHigh CompletionPercentage()
         {
-            
+            ScoreAndHigh sah = new ScoreAndHigh();
+            sah.highScore = highScore;
+            sah.score = (groundController.GetGoalPosition().x - playerController.GetStartPosition() <= 0) ?
+                100 :
+                100 - ((groundController.GetGoalPosition().x - playerController.GetStartPosition()) * 100 / startDistance);
+            if (sah.score > highScore)
+            {
+                highScore = sah.score;
+            }
+            return sah;
         }
-        
+
+    }
+
+    public class ScoreAndHigh
+    {
+        public float highScore;
+        public float score;
     }
 }

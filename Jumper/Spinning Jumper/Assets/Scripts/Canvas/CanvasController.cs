@@ -1,7 +1,5 @@
 using com.flyingcrow.jumper.canvas;
 using com.flyingcrow.jumper.events;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace com.flyingcrow.jumper.controller
@@ -35,12 +33,20 @@ namespace com.flyingcrow.jumper.controller
             {
                 Debug.LogWarning("No PlayerController found!");
             }
-            eventManager.SubscribePlayerDead(EnableCanvas);
+            eventManager.SubscribePlayerDead(EnableCanvasDead);
+            eventManager.SubscribePause(EnableCanvasPause);
         }
 
-        private void EnableCanvas()
+        private void EnableCanvasDead()
         {
-            canvas.StartLevelView(gameController.GetLevelName(), gameController.GetProgress(), playerController.GetPlayerSprite());
+            ScoreAndHigh sah = gameController.CompletionPercentage();
+            canvas.StartLevelView(gameController.GetLevelName(), sah.highScore, sah.score, playerController.GetPlayerSprite(), gameController.GetDeaths(), false);
+        }
+
+        private void EnableCanvasPause()
+        {
+            ScoreAndHigh sah = gameController.CompletionPercentage();
+            canvas.StartLevelView(gameController.GetLevelName(), sah.highScore, sah.score, playerController.GetPlayerSprite(), gameController.GetDeaths(), true);
         }
 
 

@@ -6,8 +6,6 @@ namespace com.flyingcrow.jumper.events
     public class EventManager : MonoBehaviour
     {
         [SerializeField]
-        private UnityEvent restartingLevel;
-        [SerializeField]
         private UnityEvent playerDying;
         [SerializeField]
         private UnityEvent playerDead;
@@ -15,21 +13,12 @@ namespace com.flyingcrow.jumper.events
         private UnityEvent restartLevel;
         [SerializeField]
         private UnityEvent gravitySwitch;
+        [SerializeField]
+        private UnityEvent pauseGame;
+        [SerializeField]
+        private UnityEvent resumeGame;
 
-        public void SubscribeRestartingLevel(UnityAction action)
-        {
-            restartingLevel.AddListener(action);
-        }
 
-        public void UnsubscribeRestartingLevel(UnityAction action)
-        {
-            restartingLevel.RemoveListener(action);
-        }
-
-        public void InvokeRestartingLevel()
-        {
-            restartingLevel.Invoke();
-        }
         public void SubscribePlayerDying(UnityAction action)
         {
             playerDying.AddListener(action);
@@ -88,6 +77,36 @@ namespace com.flyingcrow.jumper.events
         public void InvokeGravity()
         {
             gravitySwitch.Invoke();
+        }
+
+        public void SubscribePause(UnityAction action)
+        {
+            pauseGame.AddListener(action);
+        }
+
+        public void UnsubscribePause(UnityAction action)
+        {
+            pauseGame.RemoveListener(action);
+        }
+
+        public void InvokePause()
+        {
+            pauseGame.Invoke();
+        }
+
+        public void SubscribeResume(UnityAction action)
+        {
+            resumeGame.AddListener(action);
+        }
+
+        public void UnsubscribeResume(UnityAction action)
+        {
+            resumeGame.RemoveListener(action);
+        }
+
+        public void InvokeResume()
+        {
+            resumeGame.Invoke();
         }
     }
 }

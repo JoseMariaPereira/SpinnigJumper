@@ -18,8 +18,11 @@ namespace com.flyingcrow.jumper.controller
         private float speedMultiplier = 1;
         private List<Ground> grounds = new List<Ground>();
         private List<Spike> spikes = new List<Spike>();
+        [SerializeField]
+        private Transform goal;
 
         private Vector3 startPos;
+        private float startDistance;
 
         void Start()
         {
@@ -49,6 +52,11 @@ namespace com.flyingcrow.jumper.controller
             speedMultiplier = 0;
         }
 
+        public void Resume()
+        {
+            speedMultiplier = 1;
+        }
+
         public void RestartGround()
         {
             groundRoot.transform.position = startPos;
@@ -58,6 +66,17 @@ namespace com.flyingcrow.jumper.controller
         public void ChangeGravity()
         {
             grounds.ForEach(g => g.ChangeGravity());
+        }
+
+        public Vector3 GetGoalPosition()
+        {
+            return goal.position;
+        }
+
+        public float CompletionPercentage()
+        {
+            Debug.Log(startPos);
+            return  (goal.position.x - startPos.x <= 0) ? 100 : 100 - ((goal.position.x - startPos.x) * 100 / startDistance);
         }
 
     }

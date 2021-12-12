@@ -81,6 +81,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   eventManager: {fileID: 2765412256463064030}
   gameController: {fileID: 7615244738497153049}
+  playerController: {fileID: 8934535552620846898}
 --- !u!1 &3428281061392802794
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,9 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677f209cb7333a241852f140c041cf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartingLevel:
-    m_PersistentCalls:
-      m_Calls: []
   playerDying:
     m_PersistentCalls:
       m_Calls: []
@@ -183,10 +181,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventManager: {fileID: 2765412256463064030}
-  percentage: 0
+  groundController: {fileID: 818728449563212599}
+  playerController: {fileID: 8934535552620846898}
+  levelName: Bestish Stageish
   deathCounter: 0
-  startPos: 0
-  endPos: 0
 --- !u!1 &5856914735478942592
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +231,7 @@ MonoBehaviour:
   eventManager: {fileID: 2765412256463064030}
   groundRoot: {fileID: 0}
   groundSpeed: 10
+  goal: {fileID: 0}
 --- !u!1 &6397971396733809051
 GameObject:
   m_ObjectHideFlags: 0
