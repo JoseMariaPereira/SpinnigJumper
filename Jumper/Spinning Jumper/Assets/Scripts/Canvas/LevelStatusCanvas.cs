@@ -5,6 +5,7 @@ using com.flyingcrow.jumper.events;
 
 namespace com.flyingcrow.jumper.canvas
 {
+    [RequireComponent(typeof(Canvas))]
     public class LevelStatusCanvas : MonoBehaviour
     {
         [SerializeField]
@@ -32,7 +33,7 @@ namespace com.flyingcrow.jumper.canvas
                 Debug.LogWarning("No EventManager found!");
             }
             eventManager.SubscribeRestarting(RestartLevel);
-            this.gameObject.SetActive(false);
+            this.GetComponent<Canvas>().enabled = false;
         }
 
         private void Update()
@@ -58,7 +59,7 @@ namespace com.flyingcrow.jumper.canvas
                 progressText.text = "Progress: " + 0;
                 progressHandle.sprite = playerSprite;
                 attemptsText.text = "Attempts: " + deaths;
-                this.gameObject.SetActive(true);
+                this.GetComponent<Canvas>().enabled = true;
                 if (!paused)
                 {
                     playButton.onClick.RemoveAllListeners();
@@ -78,7 +79,7 @@ namespace com.flyingcrow.jumper.canvas
 
         private void RestartLevel()
         {
-            this.gameObject.SetActive(false);
+            this.GetComponent<Canvas>().enabled = false;
         }
 
     }

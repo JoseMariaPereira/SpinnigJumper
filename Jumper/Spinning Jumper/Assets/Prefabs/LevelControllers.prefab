@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926244215238548944}
   m_Layer: 0
-  m_Name: Controllers
+  m_Name: LevelControllers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,6 +135,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   gravitySwitch:
+    m_PersistentCalls:
+      m_Calls: []
+  pauseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  resumeGame:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &4072975509032999002
