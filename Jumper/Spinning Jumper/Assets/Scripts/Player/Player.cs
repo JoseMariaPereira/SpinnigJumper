@@ -16,9 +16,15 @@ namespace com.flyingcrow.jumper.player
         [SerializeField]
         private PlayerSpriteHandler spriteHandler;
 
+        private float gameSpeed = 1;
+        private float gravity;
+        private Vector2 velocity;
+
         private void Start()
         {
             rigidBody = this.GetComponent<Rigidbody2D>();
+            gravity = rigidBody.gravityScale;
+            velocity = rigidBody.velocity;
             spriteHandler.changeGravity(rigidBody.gravityScale > 0);
         }
 
@@ -26,11 +32,11 @@ namespace com.flyingcrow.jumper.player
         {
             if (!jumping)
             {
-                spriteHandler.RotateTowardsTarget(jumpForce);
+                spriteHandler.RotateTowardsTarget(jumpForce * gameSpeed);
             } 
             else
             {
-                spriteHandler.RotateTowardsTarget(spriteHandler.transform.eulerAngles + Vector3.back * 100 * (rigidBody.gravityScale > 0 ? 1 : -1), jumpForce * 2);
+                spriteHandler.RotateTowardsTarget(spriteHandler.transform.eulerAngles + Vector3.back * 100 * (rigidBody.gravityScale > 0 ? 1 : -1), jumpForce * 2 * gameSpeed);
             }
         }
 
@@ -51,6 +57,8 @@ namespace com.flyingcrow.jumper.player
 
         public void Revive()
         {
+            gameSpeed = 1;
+            rigidBody.gravityScale = gravity;
             rigidBody.velocity = Vector2.zero;
             isDead = false; 
             jumping = true;
@@ -74,6 +82,7 @@ namespace com.flyingcrow.jumper.player
 
         public void KillPlayer()
         {
+            gravity = rigidBody.gravityScale;
             isDead = true;
             spriteHandler.PlayDead();
         }
@@ -102,6 +111,22 @@ namespace com.flyingcrow.jumper.player
         public Sprite GetSprite()
         {
             return spriteHandler.GetCompletedSprite();
+        }
+
+        public void ResumeGame()
+        {
+            gameSpeed = 1;
+            rigidBody.gravityScale = gravity;
+            rigidBody.velocity = velocity;
+        }
+
+        public void PauseGame()
+        {
+            gameSpeed = 0;
+            gravity = rigidBody.gravityScale;
+            velocity = rigidBody.velocity;
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.gravityScale = 0;
         }
     }
 }

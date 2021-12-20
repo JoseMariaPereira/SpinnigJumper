@@ -18,6 +18,7 @@ namespace com.flyingcrow.jumper.controller
         private bool dead = false;
         private bool dying = false;
 
+
         private void Start()
         {
             if (player == null) {
@@ -29,6 +30,8 @@ namespace com.flyingcrow.jumper.controller
             }
             eventManager.SubscribeRestarting(RestartPlayer);
             eventManager.SubscribeGravity(ChangeGravity);
+            eventManager.SubscribePause(PauseGame);
+            eventManager.SubscribeResume(ResumeGame);
         }
 
         private void Update()
@@ -52,12 +55,22 @@ namespace com.flyingcrow.jumper.controller
             }
         }
 
+        private void PauseGame()
+        {
+            player.PauseGame();
+        }
+
+        private void ResumeGame()
+        {
+            player.ResumeGame();
+        }
+
         public void RestartPlayer()
         {
+            player.Revive();
             player.transform.position = new Vector3(startPosition.x, startPosition.y);
             dead = false;
             dying = false;
-            player.Revive();
             if (!isGravityDown)
             {
                 eventManager.InvokeGravity();

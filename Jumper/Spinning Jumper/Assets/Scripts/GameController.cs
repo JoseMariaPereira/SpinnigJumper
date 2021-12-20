@@ -20,6 +20,8 @@ namespace com.flyingcrow.jumper.controller
 
         private float highScore;
 
+        public static float GameSpeed = 1;
+
 
 
         // Start is called before the first frame update

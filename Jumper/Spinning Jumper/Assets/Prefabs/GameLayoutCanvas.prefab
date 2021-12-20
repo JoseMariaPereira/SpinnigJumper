@@ -617,6 +617,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9557369c14aeee42a3028c912c0622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventManager: {fileID: 0}
+  titleText: {fileID: 3821262873492379044}
+  playerNameText: {fileID: 8447675567589793400}
+  pauseButton: {fileID: 3543739528717568528}
+  progressBarSlider: {fileID: 588193429392448471}
 --- !u!1 &2710355275795758403
 GameObject:
   m_ObjectHideFlags: 0

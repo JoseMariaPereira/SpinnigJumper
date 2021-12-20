@@ -33,6 +33,7 @@ namespace com.flyingcrow.jumper.canvas
                 Debug.LogWarning("No EventManager found!");
             }
             eventManager.SubscribeRestarting(RestartLevel);
+            eventManager.SubscribeResume(RestartLevel);
             this.GetComponent<Canvas>().enabled = false;
         }
 

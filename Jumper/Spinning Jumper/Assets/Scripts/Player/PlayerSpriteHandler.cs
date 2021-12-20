@@ -22,7 +22,9 @@ namespace com.flyingcrow.jumper.player
         private List<SpritesContainer> playerSprites;
         private SpriteRenderer spriteRenderer;
 
-        private void Start()
+        private float gameSpeed = 0;
+
+        private void Awake()
         {
             completedSprite = CombineSprite();
             spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -69,7 +71,7 @@ namespace com.flyingcrow.jumper.player
             Vector3 rotationTarget = FindTarget();
             if (this.transform.eulerAngles != rotationTarget)
             {
-                this.transform.eulerAngles = Vector3.MoveTowards(this.transform.eulerAngles, rotationTarget, Time.deltaTime * jumpForce * 250);
+                this.transform.eulerAngles = Vector3.MoveTowards(this.transform.eulerAngles, rotationTarget, Time.deltaTime * jumpForce * 250 );
                 if (Mathf.Abs(this.transform.eulerAngles.z - rotationTarget.z) < 1)
                 {
                     this.transform.eulerAngles = rotationTarget;

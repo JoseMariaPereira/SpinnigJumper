@@ -9,6 +9,8 @@ namespace com.flyingcrow.jumper.controller
         [SerializeField]
         private LevelStatusCanvas canvas;
         [SerializeField]
+        private LevelGameLayoutCanvas gameCanvas;
+        [SerializeField]
         private EventManager eventManager;
         [SerializeField]
         private GameController gameController;
@@ -29,12 +31,17 @@ namespace com.flyingcrow.jumper.controller
             {
                 Debug.LogWarning("No Canvas found!");
             }
+            if (!gameCanvas)
+            {
+                Debug.LogWarning("No GameCanvas found!");
+            }
             if (!playerController)
             {
                 Debug.LogWarning("No PlayerController found!");
             }
             eventManager.SubscribePlayerDead(EnableCanvasDead);
             eventManager.SubscribePause(EnableCanvasPause);
+            gameCanvas.SetInformation(gameController.GetLevelName(), "Definetly not Crow", playerController.GetPlayerSprite());
         }
 
         private void EnableCanvasDead()

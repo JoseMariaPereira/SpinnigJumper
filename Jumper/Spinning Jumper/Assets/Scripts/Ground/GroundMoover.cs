@@ -37,6 +37,8 @@ namespace com.flyingcrow.jumper.controller
             eventManager.SubscribeRestarting(RestartGround);
             eventManager.SubscribeGravity(ChangeGravity);
             eventManager.SubscribePlayerDying(StopProgress);
+            eventManager.SubscribePause(StopProgress);
+            eventManager.SubscribeResume(Resume);
             startPos = groundRoot.position;
             grounds.AddRange(groundRoot.GetComponentsInChildren<Ground>());
             spikes.AddRange(groundRoot.GetComponentsInChildren<Spike>());
